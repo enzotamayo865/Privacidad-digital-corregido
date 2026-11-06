@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Guía interactiva sobre privacidad digital: permisos de las apps, datos personales, cuentas, estafas, compras y redes sociales.">
+  <title>Camino de la privacidad</title>
+  <link rel="icon" href="candado.svg" type="image/svg+xml">
+
+  <!--
+    Todos los archivos van juntos, en la misma carpeta que este index.html (sin subcarpetas).
+    Si falta subir alguno, arriba de la página aparece un cartel rojo que dice cuál.
+  -->
+  <script>
+    var archivosFaltantes = [];
+    function archivoFaltante(nombre) {
+      if (archivosFaltantes.indexOf(nombre) === -1) archivosFaltantes.push(nombre);
+      if (document.body) mostrarAvisoArchivos();
+      else document.addEventListener("DOMContentLoaded", mostrarAvisoArchivos);
+    }
+    function mostrarAvisoArchivos() {
+      var aviso = document.getElementById("aviso-archivos");
+      if (!aviso) {
+        aviso = document.createElement("p");
+        aviso.id = "aviso-archivos";
+        aviso.setAttribute("role", "alert");
+        aviso.style.cssText = "margin:0;padding:14px 16px;background:#b3261e;color:#fff;font:700 17px/1.4 system-ui,sans-serif;text-align:center";
+        document.body.prepend(aviso);
+      }
+      aviso.textContent = "Falta subir: " + archivosFaltantes.join(", ") +
+        ". Todos los archivos tienen que estar en la misma carpeta que index.html, sin subcarpetas.";
+    }
+  </script>
+
+  <!-- Tipografías: Archivo para los títulos y Atkinson Hyperlegible para el texto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+
+  <link rel="stylesheet" href="style.css" onerror="archivoFaltante('style.css')">
+</head>
+<body>
+  <div class="pagina" id="pagina">
+
+    <!-- Barra de arriba (se ve durante el juego) -->
+    <header class="barra" id="barra" hidden>
+      <div class="marca">
+        <img src="candado.svg" alt="" width="24" height="30" onerror="archivoFaltante('candado.svg')">
+        <span class="marca-texto">Camino de la privacidad</span>
+      </div>
+      <div class="herramientas">
+        <button type="button" class="herr" id="btn-salir" hidden>Salir</button>
+      </div>
+    </header>
+
+    <noscript>
+      <p class="sin-js">Esta guía necesita JavaScript para funcionar. Activalo en tu navegador y volvé a cargar la página.</p>
+    </noscript>
+
+    <main class="vista" id="vista">
+
+      <!-- ========== Pantalla de inicio ========== -->
+      <div class="vista-inicio" id="vista-inicio">
+
+        <section class="hero">
+          <div class="hero-texto">
+            <p class="antetitulo">Guía interactiva · Privacidad digital</p>
+            <h1 id="titulo-inicio" tabindex="-1">Camino de la privacidad</h1>
+            <p class="bajada">¿Cuánto sabés de cuidar tus datos en el celular? Elegí qué harías en cada situación. Si te equivocás, te explicamos por qué.</p>
+          </div>
+          <div class="hero-arte">
+            <div class="saludo">
+              <img class="mascota-img" src="candado.svg" alt="" width="78" height="96" onerror="archivoFaltante('candado.svg')">
+              <p class="globo">¡Hola! Te acompaño en el camino.</p>
+            </div>
+            <!-- Vista previa del camino (solo en pantallas grandes) -->
+            <div class="lienzo lienzo-preview" id="lienzo-preview" aria-hidden="true"></div>
+          </div>
+        </section>
+
+        <section class="como" aria-labelledby="como-titulo">
+          <h2 class="subtitulo" id="como-titulo">Cómo se juega</h2>
+          <ol class="pasos">
+            <li><span class="paso-num" aria-hidden="true">1</span><span><b>Mirá la situación</b> y elegí qué harías.</span></li>
+            <li><span class="paso-num" aria-hidden="true">2</span><span><b>Si te equivocás,</b> te mostramos por qué y cuál era la respuesta correcta.</span></li>
+            <li><span class="paso-num" aria-hidden="true">3</span><span><b>Al final</b> recibís tu licencia de navegante y consejos para llevarte.</span></li>
+          </ol>
+          <p class="pista">Las palabras subrayadas con puntos, como <button type="button" class="glosa" data-glosa="cookies" aria-expanded="false" aria-haspopup="dialog">cookies</button>, tienen explicación. Tocalas para leerla.</p>
+        </section>
+
+        <section class="elegir" aria-labelledby="elegir-titulo">
+          <h2 class="subtitulo" id="elegir-titulo">Elegí tu recorrido</h2>
+          <div class="rutas">
+            <button type="button" class="ruta ruta-principal" data-ruta="rapido">
+              <span class="ruta-texto">
+                <span class="ruta-nombre">Recorrido rápido</span>
+                <span class="ruta-dato" data-dato="rapido">10 preguntas · unos 4 minutos</span>
+              </span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button type="button" class="ruta" data-ruta="completo">
+              <span class="ruta-texto">
+                <span class="ruta-nombre">Recorrido completo</span>
+                <span class="ruta-dato" data-dato="completo">20 preguntas · unos 8 minutos</span>
+              </span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <p class="ruta-completa">Las preguntas salen al azar entre <span id="dato-total">50</span>: cada vez que jugás te tocan otras.</p>
+        </section>
+      </div>
+
+      <!-- ========== Pantalla del juego (y del final) ========== -->
+      <div class="juego" id="vista-juego" hidden>
+
+        <!-- Mapa del camino: al costado en la compu, al final en el celular -->
+        <aside class="mapa" aria-labelledby="mapa-titulo">
+          <div class="mapa-cabecera">
+            <h2 id="mapa-titulo">Tu recorrido</h2>
+            <p class="conteo" id="conteo"></p>
+          </div>
+          <div class="lienzo" id="lienzo"></div>
+          <ul class="leyenda" aria-label="Referencias del mapa">
+            <li><span class="ley ley-bien"><svg class="ico" viewBox="-8 -8 16 16" width="11" height="11" aria-hidden="true"><path d="M-5 0.3 L-1.5 3.8 L5.2 -3.4"/></svg></span>Correcta</li>
+            <li><span class="ley ley-mal"><svg class="ico" viewBox="-8 -8 16 16" width="10" height="10" aria-hidden="true"><path d="M-4 -4 L4 4 M4 -4 L-4 4"/></svg></span>Incorrecta</li>
+            <li><span class="ley ley-nose"><svg class="ico" viewBox="-8 -8 16 16" width="12" height="12" aria-hidden="true"><text x="0" y="0.5" text-anchor="middle" dominant-baseline="central">?</text></svg></span>No sabía</li>
+            <li><img src="candado.svg" alt="" width="15" height="18" onerror="archivoFaltante('candado.svg')">Estás acá</li>
+          </ul>
+        </aside>
+
+        <div class="columna">
+          <!-- Tira de progreso (solo en el celular) -->
+          <div class="tira" id="tira">
+            <div class="tira-texto">
+              <span id="tira-parada"></span>
+              <span class="tira-aciertos" id="tira-aciertos"></span>
+            </div>
+            <div class="tira-lienzo" id="tira-lienzo" role="img"></div>
+          </div>
+
+          <!-- Acá se muestra cada pregunta y, al final, la licencia -->
+          <section class="tarjeta" id="tarjeta" aria-label="Parada actual"></section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="pie">
+      <details class="glosario">
+        <summary>Glosario de palabras del camino</summary>
+        <dl id="glosario-lista"></dl>
+      </details>
+      <div class="ajuste">
+        <label class="interruptor" for="modo-stand">
+          <input type="checkbox" id="modo-stand" role="switch">
+          <span class="interruptor-pista" aria-hidden="true"></span>
+          <span>Modo stand</span>
+        </label>
+        <p>Pensado para una compu o tablet que usan muchas personas. No guarda el avance y vuelve al inicio si nadie la toca durante 2 minutos.</p>
+      </div>
+      <div class="ajuste">
+        <label class="interruptor" for="sonido">
+          <input type="checkbox" id="sonido" role="switch" checked>
+          <span class="interruptor-pista" aria-hidden="true"></span>
+          <span>Sonidos</span>
+        </label>
+        <p>Sonidos suaves al responder y al terminar. Apagalos si molestan.</p>
+      </div>
+      <p class="aviso-datos" id="aviso-datos">Guardamos tus respuestas de forma anónima para el trabajo de la expo: solo qué opción elegiste en cada pregunta. No pedimos tu nombre ni ningún dato tuyo.</p>
+      <!-- Panel oculto para el grupo: se abre tocando 5 veces seguidas el aviso de arriba o con Ctrl + Shift + E -->
+      <details class="glosario" id="panel-datos" hidden>
+        <summary>Respuestas guardadas en esta compu</summary>
+        <div class="datos-locales">
+          <p id="conteo-local">Todavía no hay respuestas guardadas en esta compu.</p>
+          <p id="estado-envio" hidden></p>
+          <div class="datos-botones">
+            <button type="button" class="boton boton-chico" id="btn-descargar">Descargar Excel</button>
+            <button type="button" class="boton boton-chico boton-secundario" id="btn-borrar-local">Borrar las guardadas</button>
+            <button type="button" class="boton boton-chico boton-secundario" id="btn-ocultar-panel">Ocultar</button>
+          </div>
+          <p>El archivo se abre con Excel. Las respuestas quedan en el navegador de esta compu: para juntarlas, descargá el Excel en cada compu donde se jugó.</p>
+        </div>
+      </details>
+    </footer>
+  </div>
+
+  <!-- Ventana con la explicación de una palabra del glosario -->
+  <div class="glosa-pop" id="glosa-pop" role="dialog" aria-labelledby="glosa-termino" aria-describedby="glosa-def" tabindex="-1" hidden>
+    <p class="glosa-termino" id="glosa-termino"></p>
+    <p class="glosa-def" id="glosa-def"></p>
+    <button type="button" class="boton boton-chico" id="glosa-ok">Entendido</button>
+  </div>
+
+  <script src="preguntas.js" defer onerror="archivoFaltante('preguntas.js')"></script>
+  <script src="escenas.js" defer onerror="archivoFaltante('escenas.js')"></script>
+  <script src="utilidades.js" defer onerror="archivoFaltante('utilidades.js')"></script>
+  <script src="camino.js" defer onerror="archivoFaltante('camino.js')"></script>
+  <script src="sonidos.js" defer onerror="archivoFaltante('sonidos.js')"></script>
+  <script src="registro.js" defer onerror="archivoFaltante('registro.js')"></script>
+  <script src="juego.js" defer onerror="archivoFaltante('juego.js')"></script>
+</body>
+</html>
